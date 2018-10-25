@@ -33,10 +33,17 @@ require_relative '../lib/threads'
 class ThreadsTest < Minitest::Test
   def test_multiple_threads
     done = Concurrent::AtomicFixnum.new
-    total = 10
-    Threads.new(total).assert do
+    Threads.new(10).assert do
       done.increment
     end
-    assert_equal(total, done.value)
+    assert_equal(10, done.value)
+  end
+
+  def test_multiple_threads_with_cap
+    done = Concurrent::AtomicFixnum.new
+    Threads.new(3).assert(20) do
+      done.increment
+    end
+    assert_equal(20, done.value)
   end
 end

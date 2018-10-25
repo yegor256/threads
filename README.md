@@ -26,6 +26,15 @@ end
 ```
 
 You can put whatever you want into the block. The code will be executed from five threads, concurrently.
+You can also make sure the code block runs only a specific number of times
+specifying the argument in the `assert` method (it can't be smaller than the amount of threads):
+
+```ruby
+require 'threads'
+Threads.new(5).assert(20) do |i, r|
+  puts "Hello from the thread no.#{i}, repetition no.#{r}"
+end
+```
 
 That's it.
 

@@ -33,9 +33,12 @@ class Threads
     @total = total
   end
 
-  def assert(reps = 0)
+  def assert(reps = @total)
+    if reps < @total
+      raise "Repetition counter #{reps} can't be smaller than #{@total}"
+    end
     done = Concurrent::AtomicFixnum.new
-    cycles = Concurrent::AtomicFixnum.new
+    rep = Concurrent::AtomicFixnum.new
     pool = Concurrent::FixedThreadPool.new(@total)
     latch = Concurrent::CountDownLatch.new(1)
     @total.times do |t|
@@ -43,14 +46,14 @@ class Threads
         Thread.current.name = "assert-thread-#{t}"
         latch.wait(10)
         loop do
+          r = rep.increment
+          break if r > reps
           begin
-            yield t
+            yield(t, r - 1)
           rescue StandardError => e
             puts Backtrace.new(e)
             raise e
           end
-          cycles.increment
-          break if cycles.value > reps
         end
         done.increment
       end
