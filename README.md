@@ -3,9 +3,12 @@
 
 [![Build Status](https://travis-ci.org/yegor256/threads.svg)](https://travis-ci.org/yegor256/threads)
 [![Gem Version](https://badge.fury.io/rb/threads.svg)](http://badge.fury.io/rb/threads)
-[![Maintainability](https://api.codeclimate.com/v1/badges/0296baf81e86b90fba70/maintainability)](https://codeclimate.com/github/yegor256/threads/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/24fc3acdf781d98b8749/maintainability)](https://codeclimate.com/github/yegor256/threads/maintainability)
 
-Ruby test threads.
+When you need to test your code for thread safety, what do you do?
+That's right, you just don't test it.
+That's [wrong](https://www.yegor256.com/2018/03/27/how-to-test-thread-safety.html)!
+This simple gem helps you test your code with just two additional lines of code.
 
 First, install it:
 
@@ -13,14 +16,16 @@ First, install it:
 $ gem install threads
 ```
 
-Then, use it like this, to print a threads:
+Then, use it like this, to test your code from multiple concurrently running threads:
 
 ```ruby
 require 'threads'
-Threads.new.assert do |i|
+Threads.new(5).assert do |i|
   puts "Hello from threads no.#{i}"
 end
 ```
+
+You can put whatever you want into the block. The code will be executed from five threads, concurrently.
 
 That's it.
 
