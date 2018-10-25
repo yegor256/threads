@@ -21,7 +21,7 @@ Then, use it like this, to test your code from multiple concurrently running thr
 ```ruby
 require 'threads'
 Threads.new(5).assert do |i|
-  puts "Hello from threads no.#{i}"
+  puts "Hello from the thread no.#{i}"
 end
 ```
 
