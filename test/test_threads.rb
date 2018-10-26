@@ -46,4 +46,26 @@ class ThreadsTest < Minitest::Test
     end
     assert_equal(20, done.value)
   end
+
+  def test_multiple_threads_with_errors
+    log = FakeLog.new
+    assert_raises do
+      Threads.new(3, log: log).assert(20) do
+        this_code_is_broken
+      end
+    end
+    assert_equal(3, log.logs.count)
+  end
+
+  class FakeLog
+    attr_reader :logs
+
+    def initialize
+      @logs = []
+    end
+
+    def error(msg)
+      @logs << msg
+    end
+  end
 end

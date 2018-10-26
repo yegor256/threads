@@ -23,14 +23,19 @@
 # SOFTWARE.
 
 require 'concurrent'
+require 'backtrace'
 
 # Threads.
 # Author:: Yegor Bugayenko (yegor256@gmail.com)
 # Copyright:: Copyright (c) 2018 Yegor Bugayenko
 # License:: MIT
 class Threads
-  def initialize(total = Concurrent.processor_count * 8)
+  def initialize(total = Concurrent.processor_count * 8, log: STDOUT)
+    raise "Total can't be nil" if total.nil?
+    raise "Total can't be negative or zero: #{total}" unless total.positive?
     @total = total
+    raise "Log can't be nil" if log.nil?
+    @log = log
   end
 
   def assert(reps = @total)
@@ -51,7 +56,7 @@ class Threads
           begin
             yield(t, r - 1)
           rescue StandardError => e
-            puts Backtrace.new(e)
+            print(Backtrace.new(e))
             raise e
           end
         end
@@ -63,5 +68,15 @@ class Threads
     raise "Can't stop the pool" unless pool.wait_for_termination(30)
     return if done.value == @total
     raise "Only #{done.value} out of #{@total} threads completed successfully"
+  end
+
+  private
+
+  def print(msg)
+    if @log.respond_to?(:error)
+      @log.error(msg)
+    elsif @log.respond_to?(:puts)
+      @log.puts(msg)
+    end
   end
 end
