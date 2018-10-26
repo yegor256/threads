@@ -31,7 +31,7 @@ Gem::Specification.new do |s|
   s.rubygems_version = '2.3.3'
   s.required_ruby_version = '>=2.3'
   s.name = 'threads'
-  s.version = '0.0.0'
+  s.version = '0.3.0'
   s.license = 'MIT'
   s.summary = 'Test threads'
   s.description = 'Rugy Gem to test a piece of code in concurrent threads'
