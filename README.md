@@ -30,9 +30,17 @@ You can also make sure the code block runs only a specific number of times
 specifying the argument in the `assert` method (it can't be smaller than the amount of threads):
 
 ```ruby
-require 'threads'
 Threads.new(5).assert(20) do |i, r|
   puts "Hello from the thread no.#{i}, repetition no.#{r}"
+end
+```
+
+You can also provide a logger, which will print exception backtraces.
+It has to implement either method `error(msg)` or `puts(msg)`:
+
+```ruby
+Threads.new(5, log: STDOUT).assert do
+  this_code_fails_for_sure
 end
 ```
 
