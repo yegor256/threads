@@ -4,6 +4,7 @@
 [![Build Status](https://travis-ci.org/yegor256/threads.svg)](https://travis-ci.org/yegor256/threads)
 [![Gem Version](https://badge.fury.io/rb/threads.svg)](http://badge.fury.io/rb/threads)
 [![Maintainability](https://api.codeclimate.com/v1/badges/24fc3acdf781d98b8749/maintainability)](https://codeclimate.com/github/yegor256/threads/maintainability)
+[![Yard Docs](http://img.shields.io/badge/yard-docs-blue.svg)](http://rubydoc.info/github/yegor256/threads/master/frames)
 
 When you need to test your code for thread safety, what do you do?
 That's right, you just don't test it.
