@@ -6,6 +6,8 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/24fc3acdf781d98b8749/maintainability)](https://codeclimate.com/github/yegor256/threads/maintainability)
 [![Yard Docs](http://img.shields.io/badge/yard-docs-blue.svg)](http://rubydoc.info/github/yegor256/threads/master/frames)
 
+Read this blog post first: [Do You Test Ruby Code for Thread Safety?](https://www.yegor256.com/2018/11/06/ruby-threads.html)
+
 When you need to test your code for thread safety, what do you do?
 That's right, you just don't test it.
 That's [wrong](https://www.yegor256.com/2018/03/27/how-to-test-thread-safety.html)!
