@@ -13,7 +13,7 @@
 [![Test Coverage](https://img.shields.io/codecov/c/github/yegor256/threads.svg)](https://codecov.io/github/yegor256/threads?branch=master)
 [![Hits-of-Code](https://hitsofcode.com/github/yegor256/threads)](https://hitsofcode.com/view/github/yegor256/threads)
 
-Read this blog post first: [Do You Test Ruby Code for Thread Safety?](https://www.yegor256.com/2018/11/06/ruby-threads.html)
+Read this blog post first: [_Do You Test Ruby Code for Thread Safety?_](https://www.yegor256.com/2018/11/06/ruby-threads.html)
 
 When you need to test your code for thread safety, what do you do?
 That's right, you just don't test it.
