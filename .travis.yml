@@ -8,5 +8,7 @@ install:
   - bundle install
 script:
   - set -e
-  - rake
+  - bundle exec rake
+after_success:
+  - "bash <(curl -s https://codecov.io/bash)"
 

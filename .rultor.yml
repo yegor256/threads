@@ -3,10 +3,10 @@ assets:
 install: |-
   export GEM_HOME=~/.ruby
   export GEM_PATH=$GEM_HOME:$GEM_PATH
+  bundle install
 release:
   script: |-
-    bundle install
-    rake
+    bundle exec rake
     rm -rf *.gem
     sed -i "s/0\.0\.0/${tag}/g" threads.gemspec
     git add threads.gemspec
@@ -14,13 +14,10 @@ release:
     gem build threads.gemspec
     chmod 0600 ../rubygems.yml
     gem push *.gem --config-file ../rubygems.yml
-  commanders:
-  - yegor256
-architect:
-- yegor256
 merge:
-  commanders: []
   script: |-
-    bundle install
-    rake
-deploy: {}
+    bundle exec rake
+deploy:
+  script: |-
+    echo Nothing to deploy
+    exit -1
