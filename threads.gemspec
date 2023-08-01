@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new('>= 0') if s.respond_to? :required_rubygems_version=
   s.required_ruby_version = '>=2.3'
   s.name = 'threads'
-  s.version = '0.0.0'
+  s.version = '0.4.0'
   s.license = 'MIT'
   s.summary = 'Test threads'
   s.description = 'Rugy Gem to test a piece of code in concurrent threads'
