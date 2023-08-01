@@ -4,6 +4,7 @@
 [![DevOps By Rultor.com](http://www.rultor.com/b/yegor256/threads)](http://www.rultor.com/p/yegor256/threads)
 [![We recommend RubyMine](https://www.elegantobjects.org/rubymine.svg)](https://www.jetbrains.com/ruby/)
 
+[![rake](https://github.com/yegor256/threads/actions/workflows/rake.yml/badge.svg)](https://github.com/yegor256/threads/actions/workflows/rake.yml)
 [![Gem Version](https://badge.fury.io/rb/threads.svg)](http://badge.fury.io/rb/threads)
 [![Maintainability](https://api.codeclimate.com/v1/badges/24fc3acdf781d98b8749/maintainability)](https://codeclimate.com/github/yegor256/threads/maintainability)
 [![Yard Docs](http://img.shields.io/badge/yard-docs-blue.svg)](http://rubydoc.info/github/yegor256/threads/master/frames)
