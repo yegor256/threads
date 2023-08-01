@@ -1,15 +1,12 @@
 <img src="/logo.svg" width="64px" height="64px"/>
 
-[![Managed by Zerocracy](https://www.0crat.com/badge/C3RFVLU72.svg)](https://www.0crat.com/p/C3RFVLU72)
 [![EO principles respected here](https://www.elegantobjects.org/badge.svg)](https://www.elegantobjects.org)
 [![DevOps By Rultor.com](http://www.rultor.com/b/yegor256/threads)](http://www.rultor.com/p/yegor256/threads)
 [![We recommend RubyMine](https://www.elegantobjects.org/rubymine.svg)](https://www.jetbrains.com/ruby/)
 
-[![Build Status](https://travis-ci.org/yegor256/threads.svg)](https://travis-ci.org/yegor256/threads)
 [![Gem Version](https://badge.fury.io/rb/threads.svg)](http://badge.fury.io/rb/threads)
 [![Maintainability](https://api.codeclimate.com/v1/badges/24fc3acdf781d98b8749/maintainability)](https://codeclimate.com/github/yegor256/threads/maintainability)
 [![Yard Docs](http://img.shields.io/badge/yard-docs-blue.svg)](http://rubydoc.info/github/yegor256/threads/master/frames)
-
 [![Test Coverage](https://img.shields.io/codecov/c/github/yegor256/threads.svg)](https://codecov.io/github/yegor256/threads?branch=master)
 [![Hits-of-Code](https://hitsofcode.com/github/yegor256/threads)](https://hitsofcode.com/view/github/yegor256/threads)
 
