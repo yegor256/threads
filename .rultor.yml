@@ -3,7 +3,8 @@ docker:
 assets:
   rubygems.yml: yegor256/home#assets/rubygems.yml
 install: |-
-  sudo bundle install --no-color "--gemfile=$(pwd)/Gemfile"
+  sudo chown -R "$(whoami)" /usr/local/rvm
+  bundle install --no-color "--gemfile=$(pwd)/Gemfile"
 release:
   script: |-
     bundle exec rake
