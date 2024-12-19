@@ -26,10 +26,26 @@ require 'concurrent'
 require 'backtrace'
 
 # Threads.
+#
+# This class may help you test your code for thread-safety by running
+# it multiple times in a few parallel threads:
+#
+#  require 'threads'
+#  Threads.new(5).assert do |i|
+#    puts "Hello from the thread no.#{i}"
+#  end
+#
+# Here, the message will be printed to the console five times, once in every
+# thread.
+#
 # Author:: Yegor Bugayenko (yegor256@gmail.com)
 # Copyright:: Copyright (c) 2018-2024 Yegor Bugayenko
 # License:: MIT
 class Threads
+  # Constructor.
+  #
+  # @param [Number] total How many threads to run
+  # @param [Logger] log Where to print output
   def initialize(total = Concurrent.processor_count * 8, log: $stdout)
     raise "Total can't be nil" if total.nil?
     raise "Total can't be negative or zero: #{total}" unless total.positive?
@@ -38,6 +54,10 @@ class Threads
     @log = log
   end
 
+  # Run them all and assert that all of them finished successfully.
+  #
+  # @param [Number] reps How many times to repeat the testing cycle
+  # @return nil
   def assert(reps = @total)
     raise "Repetition counter #{reps} can't be smaller than #{@total}" if reps < @total
     done = Concurrent::AtomicFixnum.new
