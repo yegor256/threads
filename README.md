@@ -1,4 +1,4 @@
-<img src="/logo.svg" width="64px" height="64px"/>
+# Runs Code Block in Many Threads
 
 [![EO principles respected here](https://www.elegantobjects.org/badge.svg)](https://www.elegantobjects.org)
 [![DevOps By Rultor.com](http://www.rultor.com/b/yegor256/threads)](http://www.rultor.com/p/yegor256/threads)
@@ -11,12 +11,14 @@
 [![Test Coverage](https://img.shields.io/codecov/c/github/yegor256/threads.svg)](https://codecov.io/github/yegor256/threads?branch=master)
 [![Hits-of-Code](https://hitsofcode.com/github/yegor256/threads)](https://hitsofcode.com/view/github/yegor256/threads)
 
-Read this blog post first: [_Do You Test Ruby Code for Thread Safety?_](https://www.yegor256.com/2018/11/06/ruby-threads.html)
+Read this blog post first: [Do You Test Ruby Code for Thread Safety?][blog]
 
 When you need to test your code for thread safety, what do you do?
 That's right, you just don't test it.
-That's [wrong](https://www.yegor256.com/2018/03/27/how-to-test-thread-safety.html)!
-This simple gem helps you test your code with just two additional lines of code.
+That's
+[wrong](https://www.yegor256.com/2018/03/27/how-to-test-thread-safety.html)!
+This simple gem helps you test your code
+with just two additional lines of code.
 
 First, install it:
 
@@ -24,7 +26,8 @@ First, install it:
 $ gem install threads
 ```
 
-Then, use it like this, to test your code from multiple concurrently running threads:
+Then, use it like this, to test your code from multiple
+concurrently running threads:
 
 ```ruby
 require 'threads'
@@ -33,9 +36,11 @@ Threads.new(5).assert do |i|
 end
 ```
 
-You can put whatever you want into the block. The code will be executed from five threads, concurrently.
+You can put whatever you want into the block. The code will be executed
+from five threads, concurrently.
 You can also make sure the code block runs only a specific number of times
-specifying the argument in the `assert` method (it can't be smaller than the amount of threads):
+specifying the argument in the `assert` method (it can't be smaller
+than the amount of threads):
 
 ```ruby
 Threads.new(5).assert(20) do |i, r|
@@ -56,14 +61,18 @@ That's it.
 
 ## How to contribute
 
-Read [these guidelines](https://www.yegor256.com/2014/04/15/github-guidelines.html).
+Read
+[these guidelines](https://www.yegor256.com/2014/04/15/github-guidelines.html).
 Make sure you build is green before you contribute
-your pull request. You will need to have [Ruby](https://www.ruby-lang.org/en/) 2.3+ and
+your pull request. You will need to have
+[Ruby](https://www.ruby-lang.org/en/) 2.3+ and
 [Bundler](https://bundler.io/) installed. Then:
 
-```
-$ bundle update
-$ bundle exec rake
+```bash
+bundle update
+bundle exec rake
 ```
 
 If it's clean and you don't see any error messages, submit your pull request.
+
+[blog]: https://www.yegor256.com/2018/11/06/ruby-threads.html

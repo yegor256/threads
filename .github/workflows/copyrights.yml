@@ -20,17 +20,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 ---
-AllCops:
-  DisplayCopNames: true
-  TargetRubyVersion: 2.3.3
-  NewCops: enable
-  SuggestExtensions: false
-
-Layout/MultilineMethodCallIndentation:
-  Enabled: false
-Metrics/AbcSize:
-  Max: 30
-Metrics/MethodLength:
-  Max: 30
-Metrics/BlockLength:
-  Max: 30
+name: copyrights
+'on':
+  push:
+  pull_request:
+jobs:
+  copyrights:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: yegor256/copyrights-action@0.0.8
