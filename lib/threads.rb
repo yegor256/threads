@@ -64,24 +64,30 @@ class Threads
     rep = Concurrent::AtomicFixnum.new
     pool = Concurrent::FixedThreadPool.new(@total)
     latch = Concurrent::CountDownLatch.new(1)
+    finish = Concurrent::CountDownLatch.new(@total)
     @total.times do |t|
       pool.post do
         Thread.current.name = "assert-thread-#{t}"
         latch.wait(10)
-        loop do
-          r = rep.increment
-          break if r > reps
-          begin
-            yield(t, r - 1)
-          rescue StandardError => e
-            print(Backtrace.new(e))
-            raise e
+        begin
+          loop do
+            r = rep.increment
+            break if r > reps
+            begin
+              yield(t, r - 1)
+            rescue StandardError => e
+              print(Backtrace.new(e))
+              raise e
+            end
           end
+          done.increment
+        ensure
+          finish.count_down
         end
-        done.increment
       end
     end
     latch.count_down
+    finish.wait(10)
     pool.shutdown
     raise "Can't stop the pool" unless pool.wait_for_termination(30)
     return if done.value == @total
