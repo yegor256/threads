@@ -47,6 +47,15 @@ class ThreadsTest < Minitest::Test
     assert_equal(20, done.value)
   end
 
+  def test_slow_threads
+    done = Concurrent::AtomicFixnum.new
+    Threads.new(3).assert(20) do
+      sleep(0.1)
+      done.increment
+    end
+    assert_equal(20, done.value)
+  end
+
   def test_multiple_threads_with_errors
     log = FakeLog.new
     assert_raises do

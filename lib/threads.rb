@@ -33,16 +33,13 @@ class Threads
   def initialize(total = Concurrent.processor_count * 8, log: $stdout)
     raise "Total can't be nil" if total.nil?
     raise "Total can't be negative or zero: #{total}" unless total.positive?
-
     @total = total
     raise "Log can't be nil" if log.nil?
-
     @log = log
   end
 
   def assert(reps = @total)
     raise "Repetition counter #{reps} can't be smaller than #{@total}" if reps < @total
-
     done = Concurrent::AtomicFixnum.new
     rep = Concurrent::AtomicFixnum.new
     pool = Concurrent::FixedThreadPool.new(@total)
@@ -54,7 +51,6 @@ class Threads
         loop do
           r = rep.increment
           break if r > reps
-
           begin
             yield(t, r - 1)
           rescue StandardError => e
@@ -69,7 +65,6 @@ class Threads
     pool.shutdown
     raise "Can't stop the pool" unless pool.wait_for_termination(30)
     return if done.value == @total
-
     raise "Only #{done.value} out of #{@total} threads completed successfully"
   end
 
