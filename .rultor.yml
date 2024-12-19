@@ -28,6 +28,7 @@ install: |-
   sudo chown -R "$(whoami)" /usr/local/rvm
   bundle install --no-color "--gemfile=$(pwd)/Gemfile"
 release:
+  pre: false
   script: |-
     bundle exec rake
     rm -rf *.gem
