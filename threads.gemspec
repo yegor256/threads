@@ -37,7 +37,7 @@ Gem::Specification.new do |s|
   s.files = `git ls-files`.split($RS)
   s.rdoc_options = ['--charset=UTF-8']
   s.extra_rdoc_files = ['README.md']
-  s.add_runtime_dependency 'backtrace', '~>0'
-  s.add_runtime_dependency 'concurrent-ruby', '~>1.0'
+  s.add_dependency 'backtrace', '~>0'
+  s.add_dependency 'concurrent-ruby', '~>1.0'
   s.metadata['rubygems_mfa_required'] = 'true'
 end
