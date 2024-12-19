@@ -37,5 +37,4 @@ jobs:
       - run: bundle exec rake
       - uses: codecov/codecov-action@v5
         with:
-          file: coverage/.resultset.json
-          fail_ci_if_error: true
+          token: ${{ secrets.CODECOV_TOKEN }}

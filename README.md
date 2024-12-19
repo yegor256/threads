@@ -23,7 +23,7 @@ with just two additional lines of code.
 First, install it:
 
 ```bash
-$ gem install threads
+gem install threads
 ```
 
 Then, use it like this, to test your code from multiple
