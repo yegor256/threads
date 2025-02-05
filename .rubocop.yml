@@ -25,7 +25,6 @@ AllCops:
   TargetRubyVersion: 2.3.3
   NewCops: enable
   SuggestExtensions: false
-
 Metrics/AbcSize:
   Max: 50
 Metrics/MethodLength:
@@ -34,3 +33,7 @@ Metrics/BlockLength:
   Max: 30
 Layout/EmptyLineAfterGuardClause:
   Enabled: false
+required:
+  - rubocop-rake
+  - rubocop-minitest
+  - rubocop-performance
