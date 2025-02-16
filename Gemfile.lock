@@ -81,7 +81,7 @@ DEPENDENCIES
   rubocop-minitest (> 0)
   rubocop-performance (> 0)
   rubocop-rake (> 0)
-  rubocop-rspec (= 3.4.0)
+  rubocop-rspec (> 0)
   simplecov (= 0.22.0)
   threads!
   yard (= 0.9.37)
