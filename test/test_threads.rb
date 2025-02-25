@@ -39,7 +39,7 @@ class ThreadsTest < Minitest::Test
 
   def test_multiple_threads_with_errors
     log = FakeLog.new
-    assert_raises do
+    assert_raises(StandardError) do
       Threads.new(3, log: log).assert(20) do
         this_code_is_broken
       end
