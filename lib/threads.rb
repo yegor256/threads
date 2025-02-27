@@ -37,6 +37,21 @@ class Threads
 
   # Run them all and assert that all of them finished successfully.
   #
+  # For example, test a counter for thread safety:
+  #
+  #  counter = 0
+  #  mutex = Mutex.new
+  #  Threads.new(10).assert do |t|
+  #    mutex.synchronize { counter += 1 }
+  #  end
+  #  puts "Final counter value: #{counter}"
+  #
+  # You can also access the repetition index:
+  #
+  #  Threads.new(4).assert(100) do |t, r|
+  #    puts "Thread #{t}, repetition #{r}"
+  #  end
+  #
   # @param [Number] reps How many times to repeat the testing cycle
   # @return nil
   def assert(reps = @total)

@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.version = '0.0.0'
   s.license = 'MIT'
   s.summary = 'Test threads'
-  s.description = 'Rugy Gem to test a piece of code in concurrent threads'
+  s.description = 'Ruby Gem to test a piece of code in concurrent threads'
   s.authors = ['Yegor Bugayenko']
   s.email = 'yegor256@gmail.com'
   s.homepage = 'http://github.com/yegor256/threads'
