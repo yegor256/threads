@@ -28,7 +28,7 @@ GEM
       stringio
     racc (1.8.1)
     rainbow (3.1.1)
-    rake (13.3.0)
+    rake (13.3.1)
     rdoc (6.14.1)
       erb
       psych (>= 4.0.0)
@@ -58,9 +58,6 @@ GEM
     rubocop-rake (0.7.1)
       lint_roller (~> 1.1)
       rubocop (>= 1.72.1)
-    rubocop-rspec (3.6.0)
-      lint_roller (~> 1.1)
-      rubocop (~> 1.72, >= 1.72.1)
     ruby-progressbar (1.13.0)
     simplecov (0.22.0)
       docile (~> 1.1)
@@ -86,10 +83,9 @@ DEPENDENCIES
   rake (~> 13.2)
   rdoc (~> 6.12)
   rubocop (~> 1.75)
-  rubocop-minitest (> 0)
-  rubocop-performance (> 0)
-  rubocop-rake (> 0)
-  rubocop-rspec (> 0)
+  rubocop-minitest (~> 0.38)
+  rubocop-performance (~> 1.25)
+  rubocop-rake (~> 0.7)
   simplecov (~> 0.22)
   threads!
   yard (~> 0.9)
