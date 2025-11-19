@@ -10,7 +10,7 @@ require_relative '../lib/threads'
 # Threads test.
 # Author:: Yegor Bugayenko (yegor256@gmail.com)
 # Copyright:: Copyright (c) 2018-2025 Yegor Bugayenko
-# License:: MIT
+
 class ThreadsTest < Minitest::Test
   def test_multiple_threads
     done = Concurrent::AtomicFixnum.new
@@ -48,6 +48,46 @@ class ThreadsTest < Minitest::Test
       end
     end
     assert_equal(3, log.logs.count)
+  end
+
+  def test_initialize_with_invalid_shutdown_timeout
+    assert_equal(
+      "shutdown_timeout can't be negative or zero: 0",
+      assert_raises(RuntimeError) do
+        Threads.new(3, shutdown_timeout: 0)
+      end.message
+    )
+  end
+
+  def test_initialize_with_invalid_task_timeout
+    assert_equal(
+      "task_timeout can't be negative or zero: -5",
+      assert_raises(RuntimeError) do
+        Threads.new(3, task_timeout: -5)
+      end.message
+    )
+  end
+
+  def test_custom_timeout_parameters
+    assert_equal(
+      "Can't stop the pool",
+      assert_raises(RuntimeError) do
+        Threads.new(1, task_timeout: 1, shutdown_timeout: 1).assert do
+          sleep(3)
+        end
+      end.message
+    )
+  end
+
+  def test_custom_timeout_parameters_for_assert
+    assert_equal(
+      "Can't stop the pool",
+      assert_raises(RuntimeError) do
+        Threads.new(1).assert(shutdown_timeout: 1, task_timeout: 1) do
+          sleep(3)
+        end
+      end.message
+    )
   end
 
   class FakeLog
