@@ -17,6 +17,7 @@ class ThreadsTest < Minitest::Test
     Threads.new(10).assert do
       done.increment
     end
+
     assert_equal(10, done.value)
   end
 
@@ -25,6 +26,7 @@ class ThreadsTest < Minitest::Test
     Threads.new(3).assert(20) do
       done.increment
     end
+
     assert_equal(20, done.value)
   end
 
@@ -34,6 +36,7 @@ class ThreadsTest < Minitest::Test
       sleep(0.1)
       done.increment
     end
+
     assert_equal(20, done.value)
   end
 
