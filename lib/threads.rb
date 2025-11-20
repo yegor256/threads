@@ -27,12 +27,26 @@ class Threads
   #
   # @param [Number] total How many threads to run
   # @param [Logger] log Where to print output
-  def initialize(total = Concurrent.processor_count * 8, log: $stdout)
+  # @param [Number] task_timeout How many seconds to wait for all tasks to finish
+  # @param [Number] shutdown_timeout How many seconds to wait for the thread pool to shut down
+  def initialize(total = Concurrent.processor_count * 8, log: $stdout, task_timeout: 10, shutdown_timeout: 30)
     raise "Total can't be nil" if total.nil?
     raise "Total can't be negative or zero: #{total}" unless total.positive?
     @total = total
     raise "Log can't be nil" if log.nil?
     @log = log
+    validate('task_timeout', task_timeout)
+    @task_timeout = task_timeout
+    validate('shutdown_timeout', shutdown_timeout)
+    @shutdown_timeout = shutdown_timeout
+  end
+
+  # Validate a timeout value.
+  # @param [String] label Label to use in the error message
+  # @param [Number] timeout Timeout value to validate
+  def validate(label, timeout)
+    raise "#{label} can't be nil" if timeout.nil?
+    raise "#{label} can't be negative or zero: #{timeout}" unless timeout.positive?
   end
 
   # Run them all and assert that all of them finished successfully.
@@ -53,9 +67,13 @@ class Threads
   #  end
   #
   # @param [Number] reps How many times to repeat the testing cycle
+  # @param [Number] task_timeout How many seconds to wait for all tasks to finish
+  # @param [Number] shutdown_timeout How many seconds to wait for the thread pool to shut down
   # @return nil
-  def assert(reps = @total)
+  def assert(reps = @total, task_timeout: @task_timeout, shutdown_timeout: @shutdown_timeout)
     raise "Repetition counter #{reps} can't be smaller than #{@total}" if reps < @total
+    validate('task_timeout', task_timeout)
+    validate('shutdown_timeout', shutdown_timeout)
     done = Concurrent::AtomicFixnum.new
     rep = Concurrent::AtomicFixnum.new
     pool = Concurrent::FixedThreadPool.new(@total)
@@ -83,9 +101,9 @@ class Threads
       end
     end
     latch.count_down
-    finish.wait(10)
+    finish.wait(task_timeout)
     pool.shutdown
-    raise "Can't stop the pool" unless pool.wait_for_termination(30)
+    raise "Can't stop the pool" unless pool.wait_for_termination(shutdown_timeout)
     return if done.value == @total
     raise "Only #{done.value} out of #{@total} threads completed successfully"
   end
