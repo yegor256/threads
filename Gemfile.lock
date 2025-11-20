@@ -59,9 +59,6 @@ GEM
     rubocop-rake (0.7.1)
       lint_roller (~> 1.1)
       rubocop (>= 1.72.1)
-    rubocop-rspec (3.8.0)
-      lint_roller (~> 1.1)
-      rubocop (~> 1.81)
     ruby-progressbar (1.13.0)
     simplecov (0.22.0)
       docile (~> 1.1)
@@ -92,7 +89,6 @@ DEPENDENCIES
   rubocop-minitest (~> 0.38)
   rubocop-performance (~> 1.25)
   rubocop-rake (~> 0.7)
-  rubocop-rspec (~> 3.8)
   simplecov (~> 0.22)
   threads!
   yard (~> 0.9)
