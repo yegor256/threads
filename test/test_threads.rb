@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# SPDX-FileCopyrightText: Copyright (c) 2018-2025 Yegor Bugayenko
+# SPDX-FileCopyrightText: Copyright (c) 2018-2026 Yegor Bugayenko
 # SPDX-License-Identifier: MIT
 
 require 'minitest/autorun'
@@ -9,7 +9,7 @@ require_relative '../lib/threads'
 
 # Threads test.
 # Author:: Yegor Bugayenko (yegor256@gmail.com)
-# Copyright:: Copyright (c) 2018-2025 Yegor Bugayenko
+# Copyright:: Copyright (c) 2018-2026 Yegor Bugayenko
 
 class ThreadsTest < Minitest::Test
   def test_multiple_threads
