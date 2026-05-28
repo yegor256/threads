@@ -3,8 +3,8 @@
 # SPDX-FileCopyrightText: Copyright (c) 2018-2026 Yegor Bugayenko
 # SPDX-License-Identifier: MIT
 
-require 'minitest/autorun'
 require 'concurrent'
+require 'minitest/autorun'
 require_relative '../lib/threads'
 
 # Threads test.
@@ -17,7 +17,6 @@ class ThreadsTest < Minitest::Test
     Threads.new(10).assert do
       done.increment
     end
-
     assert_equal(10, done.value)
   end
 
@@ -26,7 +25,6 @@ class ThreadsTest < Minitest::Test
     Threads.new(3).assert(20) do
       done.increment
     end
-
     assert_equal(20, done.value)
   end
 
@@ -36,7 +34,6 @@ class ThreadsTest < Minitest::Test
       sleep(0.1)
       done.increment
     end
-
     assert_equal(20, done.value)
   end
 
@@ -53,7 +50,7 @@ class ThreadsTest < Minitest::Test
   def test_initialize_with_invalid_shutdown_timeout
     assert_equal(
       "shutdown_timeout can't be negative or zero: 0",
-      assert_raises(RuntimeError) do
+      assert_raises(ArgumentError) do
         Threads.new(3, shutdown_timeout: 0)
       end.message
     )
@@ -62,7 +59,7 @@ class ThreadsTest < Minitest::Test
   def test_initialize_with_invalid_task_timeout
     assert_equal(
       "task_timeout can't be negative or zero: -5",
-      assert_raises(RuntimeError) do
+      assert_raises(ArgumentError) do
         Threads.new(3, task_timeout: -5)
       end.message
     )
@@ -71,7 +68,7 @@ class ThreadsTest < Minitest::Test
   def test_custom_timeout_parameters
     assert_equal(
       "Can't stop the pool",
-      assert_raises(RuntimeError) do
+      assert_raises(StandardError) do
         Threads.new(1, task_timeout: 1, shutdown_timeout: 1).assert do
           sleep(3)
         end
@@ -82,7 +79,7 @@ class ThreadsTest < Minitest::Test
   def test_custom_timeout_parameters_for_assert
     assert_equal(
       "Can't stop the pool",
-      assert_raises(RuntimeError) do
+      assert_raises(StandardError) do
         Threads.new(1).assert(shutdown_timeout: 1, task_timeout: 1) do
           sleep(3)
         end

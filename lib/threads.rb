@@ -3,8 +3,8 @@
 # SPDX-FileCopyrightText: Copyright (c) 2018-2026 Yegor Bugayenko
 # SPDX-License-Identifier: MIT
 
-require 'concurrent'
 require 'backtrace'
+require 'concurrent'
 
 # Threads.
 #
@@ -30,10 +30,10 @@ class Threads
   # @param [Number] task_timeout How many seconds to wait for all tasks to finish
   # @param [Number] shutdown_timeout How many seconds to wait for the thread pool to shut down
   def initialize(total = Concurrent.processor_count * 8, log: $stdout, task_timeout: 10, shutdown_timeout: 30)
-    raise "Total can't be nil" if total.nil?
-    raise "Total can't be negative or zero: #{total}" unless total.positive?
+    raise(ArgumentError, "Total can't be nil") if total.nil?
+    raise(ArgumentError, "Total can't be negative or zero: #{total}") unless total.positive?
     @total = total
-    raise "Log can't be nil" if log.nil?
+    raise(ArgumentError, "Log can't be nil") if log.nil?
     @log = log
     validate('task_timeout', task_timeout)
     @task_timeout = task_timeout
@@ -45,8 +45,8 @@ class Threads
   # @param [String] label Label to use in the error message
   # @param [Number] timeout Timeout value to validate
   def validate(label, timeout)
-    raise "#{label} can't be nil" if timeout.nil?
-    raise "#{label} can't be negative or zero: #{timeout}" unless timeout.positive?
+    raise(ArgumentError, "#{label} can't be nil") if timeout.nil?
+    raise(ArgumentError, "#{label} can't be negative or zero: #{timeout}") unless timeout.positive?
   end
 
   # Run them all and assert that all of them finished successfully.
@@ -71,7 +71,7 @@ class Threads
   # @param [Number] shutdown_timeout How many seconds to wait for the thread pool to shut down
   # @return nil
   def assert(reps = @total, task_timeout: @task_timeout, shutdown_timeout: @shutdown_timeout)
-    raise "Repetition counter #{reps} can't be smaller than #{@total}" if reps < @total
+    raise(ArgumentError, "Repetition counter #{reps} can't be smaller than #{@total}") if reps < @total
     validate('task_timeout', task_timeout)
     validate('shutdown_timeout', shutdown_timeout)
     done = Concurrent::AtomicFixnum.new
@@ -91,7 +91,7 @@ class Threads
               yield(t, r - 1)
             rescue StandardError => e
               print(Backtrace.new(e))
-              raise e
+              raise(e)
             end
           end
           done.increment
@@ -103,9 +103,9 @@ class Threads
     latch.count_down
     finish.wait(task_timeout)
     pool.shutdown
-    raise "Can't stop the pool" unless pool.wait_for_termination(shutdown_timeout)
+    raise(StandardError, "Can't stop the pool") unless pool.wait_for_termination(shutdown_timeout)
     return if done.value == @total
-    raise "Only #{done.value} out of #{@total} threads completed successfully"
+    raise(StandardError, "Only #{done.value} out of #{@total} threads completed successfully")
   end
 
   private

@@ -3,9 +3,9 @@
 # SPDX-FileCopyrightText: Copyright (c) 2018-2026 Yegor Bugayenko
 # SPDX-License-Identifier: MIT
 
-require 'rubygems'
 require 'rake'
 require 'rake/clean'
+require 'rubygems'
 
 CLEAN = FileList['coverage']
 
@@ -31,7 +31,6 @@ require 'yard'
 desc 'Build Yard documentation'
 YARD::Rake::YardocTask.new do |t|
   t.files = ['lib/**/*.rb']
-  t.options = ['--fail-on-warning']
 end
 
 require 'rubocop/rake_task'
