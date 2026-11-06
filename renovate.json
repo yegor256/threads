@@ -4,5 +4,18 @@
     "config:base"
   ],
   "automerge": true,
-  "platformAutomerge": false
+  "platformAutomerge": false,
+  "packageRules": [
+    {
+      "matchManagers": [
+        "bundler"
+      ],
+      "matchPackageNames": [
+        "simplecov",
+        "simplecov-cobertura"
+      ],
+      "groupName": "SimpleCov coverage",
+      "groupSlug": "simplecov-coverage"
+    }
+  ]
 }
